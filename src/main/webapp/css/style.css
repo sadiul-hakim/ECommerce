@@ -1,0 +1,32 @@
+@charset "ISO-8859-1";
+
+:root{
+	--primary-color:#1c5ee2;
+	--x-shadow:2px 0px 2px 1px #000;
+	--y-shadow:0px 2px 2px 1px #000;
+	--all-shadow:1px 1px 2px 0px #000;
+}
+
+body{
+	background-image: url("../img/cool-background.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.nav{
+	background: var(--primary-color);
+	position: sticky;
+	top: 0;
+	box-shadow:var(--x-shadow);
+	z-index: 10;
+}
+
+.register-title,
+.login-title{
+	color:var(--primary-color);
+}
+
+.register-card,
+.login-card{
+	box-shadow:var(--all-shadow);	
+}
