@@ -7,4 +7,5 @@ import com.ecommerce.entities.Category;
 public interface CategoryService {
 	int add(Category category);
 	List<Category> allCategories();
+	Category getCategory(int id);
 }

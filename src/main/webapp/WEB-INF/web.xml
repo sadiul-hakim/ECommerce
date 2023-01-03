@@ -22,6 +22,24 @@
   	<description></description>
   	<servlet-class>com.ecommerce.servlet.LogoutServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AddCategoryServlet</servlet-name>
+  	<display-name>AddCategoryServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ecommerce.servlet.AddCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AddProductServlet</servlet-name>
+  	<display-name>AddProductServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ecommerce.servlet.AddProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>AddToCartServlet</servlet-name>
+  	<display-name>AddToCartServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.ecommerce.servlet.AddToCartServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>RegisterServlet</servlet-name>
   	<url-pattern>/RegisterServlet</url-pattern>
@@ -34,4 +52,22 @@
   	<servlet-name>LogoutServlet</servlet-name>
   	<url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddCategoryServlet</servlet-name>
+  	<url-pattern>/AddCategoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddProductServlet</servlet-name>
+  	<url-pattern>/AddProductServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AddToCartServlet</servlet-name>
+  	<url-pattern>/AddToCartServlet</url-pattern>
+  </servlet-mapping>
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error404.jsp</location>
+  </error-page>
+  
 </web-app>

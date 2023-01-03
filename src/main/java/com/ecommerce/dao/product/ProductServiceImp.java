@@ -6,12 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import com.ecommerce.entities.Category;
 import com.ecommerce.entities.Product;
-import com.ecommerce.entities.User;
 import com.ecommerce.helper.FactoryProvider;
 
-public class ProductServiceImp implements ProductService {
+public class ProductServiceImp implements ProductService{
 
 	@Override
 	public int save(Product product) {
@@ -49,12 +47,25 @@ public class ProductServiceImp implements ProductService {
 			q.setParameter("i", id);
 			
 			product=q.uniqueResult();
-			
+				
 			session.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return product;
+	}
+
+	@Override
+	public List<Product> getAllProductsByCategory(int cid) {
+		String query="from Product where cid_id=:c";
+		Session session=FactoryProvider.getFactory().openSession();		
+		Query<Product> q=session.createQuery(query);
+		q.setParameter("c", cid);
+		
+		List<Product> list=q.getResultList();
+		
+		session.close();
+		return list;
 	}
 
 }

@@ -91,7 +91,7 @@ public class UserServiceImp implements UserService {
 
 	@Override
 	public List<User> allUsers() {
-		String query="from User";
+		String query="from User where role='user'";
 		Session session=FactoryProvider.getFactory().openSession();
 		
 		Query<User> q=session.createQuery(query);

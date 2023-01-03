@@ -4,10 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,6 +32,7 @@ public class Product {
 	
 	@ManyToOne
 	private Category cid;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
@@ -134,12 +138,16 @@ public class Product {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public int getPriceAfterDiscount() {
+		return getPrice()-(getPrice()*getDiscount())/100;
+	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", title=" + title + ", description=" + description + ", pic=" + pic + ", price="
 				+ price + ", discount=" + discount + ", quantity=" + quantity + ", cid=" + cid + ", date=" + date + "]";
 	}
-	
+
 	
 }

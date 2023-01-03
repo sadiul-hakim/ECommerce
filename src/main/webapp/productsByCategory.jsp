@@ -1,34 +1,35 @@
 <%@page import="com.ecommerce.entities.Category"%>
 <%@page import="com.ecommerce.dao.category.CategoryServiceImp"%>
-<%@page import="com.ecommerce.helper.PathProvider"%>
 <%@page import="com.ecommerce.entities.Product"%>
 <%@page import="java.util.List"%>
 <%@page import="com.ecommerce.dao.product.ProductServiceImp"%>
+<%@page import="com.ecommerce.dao.product.ProductService"%>
 <%@page import="com.ecommerce.entities.User"%>
-<%@page import="com.ecommerce.helper.FactoryProvider"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%
 User user = (User) session.getAttribute("user");
-
-if (user != null) {
-	if (user.getRole().equals("admin")) {
-		response.sendRedirect("admin.jsp");
-	} else {
-		response.sendRedirect("userIndex.jsp");
-	}
-
+if (user == null) {
+	response.sendRedirect("login.jsp");
 }
 
-//Products
-ProductServiceImp productService = new ProductServiceImp();
-List<Product> products = productService.allProducts();
-%>
+int cid = Integer.parseInt(request.getParameter("cid"));
 
-<html lang="en">
+//Categories
+CategoryServiceImp cateService = new CategoryServiceImp();
+List<Category> categories = cateService.allCategories();
+
+ProductService service = new ProductServiceImp();
+List<Product> products = service.getAllProductsByCategory(cid);
+
+%>
+<!DOCTYPE html>
+<html>
 <%@include file="Head.jsp"%>
 <body>
-	<%@include file="Navbar.jsp"%>
+	<%@include file="UserNavbar.jsp"%>
+
+
 	<div class="container my-4">
 		<div class="row">
 			<%
@@ -43,14 +44,19 @@ List<Product> products = productService.allProducts();
 						<h4 class="card-title"><%=product.getTitle()%></h4>
 						<p><%=product.getDescription()%></p>
 						<p class="m-0">
-							Price : <span style="text-decoration: line-through;"><%=product.getPrice()%></span>
-							- <span style="color: crimson;"><%=product.getDiscount()%>%</span>
+							Price : <span style="text-decoration: line-through;"><%=product.getPrice()%></span>-<span
+								style="color: crimson;"><%=product.getDiscount()%>%</span>
 						</p>
 						<h6 class="m-0">
 							Total Price:
 							<%=product.getPriceAfterDiscount()%>
 							TK
 						</h6>
+					</div>
+					<div class="card-footer">
+						<button class="btn btn-primary" onclick="addToCart(<%=user.getId() %>,<%= product.getId()%>,'<%=product.getTitle()%>',<%= product.getPriceAfterDiscount()%>);">Add To Card</button> 
+						<a href=""
+							class="btn btn-primary">See More</a>
 					</div>
 				</div>
 			</div>
